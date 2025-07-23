@@ -1,8 +1,8 @@
 "use client";
 
 import Image from "next/image";
-// import WhatsAppBtn from '@/components/WhatsAppBtn'; // We'll build this next
 import bullLogo from "/public/bull-logo.png"; // Replace with your actual logo
+import WhatsAppBtn from "./WhatsAppBtn";
 
 export default function Home() {
   return (
@@ -112,7 +112,7 @@ export default function Home() {
       </div>
 
       {/* WHATSAPP FLOATING BUTTON */}
-      {/* <WhatsAppBtn /> */}
+      <WhatsAppBtn />
     </main>
   );
 }
