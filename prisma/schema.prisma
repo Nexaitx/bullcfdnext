@@ -21,4 +21,6 @@ model Lead {
   phone     String   @db.VarChar(255)
   city      String   @db.VarChar(255)
   createdAt DateTime @default(now())
+
+  @@map("leadstable")
 }
