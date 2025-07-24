@@ -19,5 +19,6 @@ model Lead {
   name      String   @db.VarChar(255)
   email     String   @db.VarChar(255)
   phone     String   @db.VarChar(255)
+  city      String   @db.VarChar(255)
   createdAt DateTime @default(now())
 }
