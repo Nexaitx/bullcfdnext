@@ -3,7 +3,7 @@
 export default function WhatsAppBtn() {
   return (
     <a
-      href="https://wa.me/919000000000" // Replace with your number
+      href="https://wa.me/+918360891276" // Replace with your number
       target="_blank"
       className="fixed bottom-6 right-6 z-50"
     >

@@ -20,6 +20,7 @@ export default function Home() {
     formState: { errors },
   } = useForm<LeadsForm>({
     resolver: zodResolver(createLeadSchema),
+    defaultValues: { terms: true },
   });
   const [error, setError] = useState("");
   return (
@@ -129,6 +130,8 @@ export default function Home() {
                 type="checkbox"
                 id="terms"
                 className="mr-2 accent-cyan-500"
+                {...register("terms")}
+                defaultChecked
               />
               <label htmlFor="terms">
                 I agree to{" "}
