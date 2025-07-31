@@ -3,8 +3,25 @@
 import Image from "next/image";
 import bullLogo from "/public/bull-logo.png"; // Replace with your actual logo
 import WhatsAppBtn from "./WhatsAppBtn";
+import { useForm } from "react-hook-form";
+import axios from "axios";
+import { toast } from "sonner";
+import { useState } from "react";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { createLeadSchema } from "./validationSchema";
+import { z } from "zod";
+
+type LeadsForm = z.infer<typeof createLeadSchema>;
 
 export default function Home() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<LeadsForm>({
+    resolver: zodResolver(createLeadSchema),
+  });
+  const [error, setError] = useState("");
   return (
     <main className="min-h-screen grid grid-cols-1 md:grid-cols-2 bg-gradient-to-br from-[#0f172a] to-[#1e293b] text-white relative">
       {/* LEFT SECTION */}
@@ -54,12 +71,26 @@ export default function Home() {
             Create Account
           </h3>
 
-          <form className="space-y-4">
+          <form
+            className="space-y-4"
+            onSubmit={handleSubmit(async (data) => {
+              // await axios.post("/api/leads", data)
+              try {
+                await axios.post("/api/leads", data);
+                toast.success("Form submitted successfully!");
+              } catch (err) {
+                toast.error("Something went wrong. Please try again.");
+                setError("An unexpected error occured");
+              }
+            })}
+          >
             <input
               type="text"
               placeholder="Full Name"
               className="w-full px-4 py-2 rounded-md bg-white/10 border border-white/20 placeholder:text-gray-300 focus:outline-none focus:ring-2 focus:ring-cyan-500 text-white"
+              {...register("name")}
             />
+            {errors.name && <p>{errors.name.message}</p>}
 
             <div className="flex w-full">
               <div className="flex items-center px-3 bg-white/10 border border-white/20 rounded-l-md text-white text-sm gap-1">
@@ -72,20 +103,26 @@ export default function Home() {
                 type="tel"
                 placeholder="Phone"
                 className="flex-1 px-4 py-2 rounded-r-md bg-white/10 border-t border-b border-r border-white/20 placeholder:text-gray-300 focus:outline-none focus:ring-2 focus:ring-cyan-500 text-white"
+                {...register("phone")}
               />
             </div>
+            {errors.phone && <p>{errors.phone.message}</p>}
 
             <input
               type="email"
               placeholder="Email"
               className="w-full px-4 py-2 rounded-md bg-white/10 border border-white/20 placeholder:text-gray-300 focus:outline-none focus:ring-2 focus:ring-cyan-500 text-white"
+              {...register("email")}
             />
+            {errors.email && <p>{errors.email.message}</p>}
 
             <input
               type="text"
               placeholder="City"
               className="w-full px-4 py-2 rounded-md bg-white/10 border border-white/20 placeholder:text-gray-300 focus:outline-none focus:ring-2 focus:ring-cyan-500 text-white"
+              {...register("city")}
             />
+            {errors.city && <p>{errors.city.message}</p>}
 
             <div className="flex items-center text-sm text-gray-300">
               <input
