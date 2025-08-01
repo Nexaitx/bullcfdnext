@@ -1,7 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import bullLogo from "/public/bull-logo.png"; // Replace with your actual logo
+import bullLogo from "/public/bull-logo.png";
+<link rel="icon" href="/favicon.ico" />
+
 import WhatsAppBtn from "./WhatsAppBtn";
 import { useForm } from "react-hook-form";
 import axios from "axios";
