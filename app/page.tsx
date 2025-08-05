@@ -18,6 +18,8 @@ type LeadsForm = z.infer<typeof createLeadSchema>;
 
 export default function Home() {
   const router = useRouter();
+    const [showTerms, setShowTerms] = useState(false);
+
 
   const {
     register,
@@ -28,6 +30,7 @@ export default function Home() {
     resolver: zodResolver(createLeadSchema),
     defaultValues: { terms: true },
   });
+  
   const [error, setError] = useState("");
   return (
     <main className="min-h-screen grid grid-cols-1 md:grid-cols-2 bg-gradient-to-br from-[#0f172a] to-[#1e293b] text-white relative">
@@ -146,9 +149,16 @@ window.location.href = "/thankyou";
               />
               <label htmlFor="terms">
                 I agree to{" "}
-                <a href="https://bullcfd.com/index.php/privacy-policy" target="_blank" className="underline text-cyan-400">
-                  Terms & Conditions
-                </a>
+               <a
+  href="#"
+  onClick={(e) => {
+    e.preventDefault();
+    setShowTerms(true);
+  }}
+  className="underline text-cyan-400"
+>
+  Terms & Conditions
+</a>
               </label>
             </div>
 
@@ -164,6 +174,136 @@ window.location.href = "/thankyou";
 
       {/* WHATSAPP FLOATING BUTTON */}
       <WhatsAppBtn />
+
+      {showTerms && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60">
+          <div className="bg-white text-black rounded-lg p-6 max-w-lg w-full relative">
+            <button
+              className="absolute top-2 right-2 text-xl font-bold"
+              onClick={() => setShowTerms(false)}
+              aria-label="Close"
+            >
+              ×
+            </button>
+            <h2 className="text-2xl font-semibold mb-4">Terms & Conditions</h2>
+            <div className="max-h-80 overflow-y-auto text-sm">
+              {/* Place your terms & conditions content here */}
+              <p> &nbsp; </p>
+
+              <p>
+At Bull CFD, we value your privacy and are committed to protecting your personal information. This Privacy Policy explains how we collect, use, disclose, and safeguard your data when you use our website, services, or interact with us in any way. By accessing our platform, you consent to the practices described below.              </p>
+              {/* ...more content... */}
+              <p> &nbsp; </p>
+              <h2 className="font-semibold">1. Information We Collect</h2>
+              <p> &nbsp; </p>
+
+              <p>
+We may collect the following types of information:
+
+Personal Identification Information: Name, email address, phone number, date of birth, nationality, and government-issued identification.
+Financial Information: Bank account details, payment card details, transaction history.
+Technical Data: IP address, device information, browser type, operating system, and cookies.
+Usage Data: Trading activities, preferences, and navigation patterns.
+KYC/AML Documentation: Proof of identity and proof of address to comply with regulatory obligations.
+              </p>
+              <p> &nbsp; </p>
+
+              <h2 className="font-semibold">2. How We Use Your Information
+</h2>
+<p> &nbsp; </p>
+<p>We use your information for the following purposes:
+
+To create and manage your Bull CFD trading account.
+To verify your identity and comply with KYC/AML regulations.
+To process transactions and manage payment operations.
+To provide customer support and respond to inquiries.
+To send updates, newsletters, and promotional offers (you can opt-out anytime).
+To analyze website usage and improve user experience.
+To detect and prevent fraud, abuse, and unauthorized access.</p>
+<p> &nbsp; </p>
+
+<h2 className="font-semibold">
+  3. Sharing Your Information
+
+</h2>
+<p> &nbsp; </p>
+
+<p>
+  We may share your information with:
+
+Regulatory authorities and financial institutions as required by law.
+Third-party service providers that assist with hosting, payment processing, KYC verification, and customer support.
+Legal or government agencies in the case of fraud, investigation, or legal obligation.
+We do not sell, trade, or rent your personal data to any third parties.
+
+</p>
+<p> &nbsp; </p>
+
+<h2 className="font-semibold">4. Data Security
+</h2>
+<p> &nbsp; </p>
+
+<p>We implement strong security measures including encryption, firewalls, and access controls to protect your personal and financial data. However, no digital transmission or storage method is 100% secure, and we cannot guarantee absolute security.</p>
+<p> &nbsp; </p>
+
+<h2 className="font-semibold">5. Your Rights
+</h2>  
+<p> &nbsp; </p>
+
+<p>You have the right to:
+
+Access the personal data we hold about you.
+Request correction of inaccurate or incomplete information.
+Request deletion of your data, subject to regulatory and legal requirements.
+Withdraw consent where applicable.</p>
+<p> &nbsp; </p>
+
+<h2 className="font-semibold">6. Cookies and Tracking Technologies
+</h2> 
+<p> &nbsp; </p>
+
+<p>Our website uses cookies and similar technologies to enhance your browsing experience and analyze usage. You can modify your browser settings to manage cookie preferences.</p>
+<p> &nbsp; </p>
+
+<h2 className="font-semibold">7. International Data Transfers
+</h2>
+<p> &nbsp; </p>
+
+<p>Your data may be transferred and stored outside your country of residence. We ensure all transfers comply with applicable data protection laws.</p>
+     <p> &nbsp; </p>
+
+     <h2 className="font-semibold">8. Third-Party Links
+</h2> 
+<p> &nbsp; </p>
+
+<p>
+  Our website may contain links to third-party websites. We are not responsible for the privacy practices of those sites. We encourage you to read their privacy policies separately.
+</p>
+<p> &nbsp; </p>
+
+      <h2 className="font-semibold">9. Updates to This Policy
+</h2>
+<p> &nbsp; </p>
+
+<p>We may update this Privacy Policy from time to time. Changes will be posted on this page with an updated "Effective Date." Your continued use of the service after updates constitutes your acceptance of the changes.
+</p>
+<p> &nbsp; </p>
+
+<h2 className="font-semibold">
+  10. Contact Us
+
+</h2>
+<p> &nbsp; </p>
+
+<p>
+If you have any questions or concerns regarding this Privacy Policy or how we handle your data, please contact us at:
+
+Email: support@bullcfd.com
+</p>
+      </div>
+          </div>
+        </div>
+      )}
     </main>
   );
 }
