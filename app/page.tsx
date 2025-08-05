@@ -146,7 +146,7 @@ window.location.href = "/thankyou";
               />
               <label htmlFor="terms">
                 I agree to{" "}
-                <a href="#" className="underline text-cyan-400">
+                <a href="https://bullcfd.com/index.php/privacy-policy" target="_blank" className="underline text-cyan-400">
                   Terms & Conditions
                 </a>
               </label>
