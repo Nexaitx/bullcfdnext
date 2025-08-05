@@ -12,14 +12,18 @@ import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { createLeadSchema } from "./validationSchema";
 import { z } from "zod";
+import { useRouter } from "next/navigation";
 
 type LeadsForm = z.infer<typeof createLeadSchema>;
 
 export default function Home() {
+  const router = useRouter();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm<LeadsForm>({
     resolver: zodResolver(createLeadSchema),
     defaultValues: { terms: true },
@@ -80,7 +84,12 @@ export default function Home() {
               // await axios.post("/api/leads", data)
               try {
                 await axios.post("/api/leads", data);
-                toast.success("Form submitted successfully!");
+                // toast.success("Form submitted successfully!");
+if (typeof window !== "undefined") {
+      localStorage.setItem("formSubmitted", "true");
+    }
+    reset(); // Reset form fields
+window.location.href = "/thankyou";
               } catch (err) {
                 toast.error("Something went wrong. Please try again.");
                 setError("An unexpected error occured");

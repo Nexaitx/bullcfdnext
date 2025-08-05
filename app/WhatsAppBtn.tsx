@@ -1,6 +1,6 @@
 "use client";
 
-const PHONE_NUMBER = "+918360891276"; // apna number yahan daalo
+const PHONE_NUMBER = "+918360891276"; // 
 const PREFILL_MESSAGE = "Hi! Please send me my trading id.";
 
 export default function WhatsAppBtn() {
